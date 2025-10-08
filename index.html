@@ -1,1 +1,327 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Movement</title>
+    
+    <style>
+        /* ===== GLOBAL RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* ===== ANIMATED BACKGROUND PATTERN ===== */
+        /* Creates a subtle parallax effect with moving gradient circles */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .background-layer::before,
+        .background-layer::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .background-layer::before {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .background-layer::after {
+            width: 800px;
+            height: 800px;
+            bottom: -300px;
+            right: -300px;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+        
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 900px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        .headline {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.2s ease-out 0.3s backwards;
+        }
+        
+        .subheading {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            color: #cccccc;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease-out 0.6s backwards;
+        }
+        
+        /* ===== CALL-TO-ACTION BUTTON ===== */
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000000;
+            background-color: #ffffff;
+            border: 3px solid #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 1.2s ease-out 0.9s backwards;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Glow effect on hover */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .cta-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
+            background-color: #ffffff;
+        }
+        
+        .cta-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* ===== DECORATIVE ELEMENTS ===== */
+        /* Thin lines that frame the content */
+        .line-decoration {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            margin: 0 auto 40px;
+            animation: fadeInUp 1.2s ease-out 0.4s backwards;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .headline {
+                margin-bottom: 20px;
+            }
+            
+            .subheading {
+                margin-bottom: 40px;
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 18px 50px;
+                font-size: 1rem;
+            }
+            
+            .line-decoration {
+                width: 60px;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cta-button {
+                padding: 16px 40px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* ===== ACCESSIBILITY ===== */
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="background-layer"></div>
+    
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+        <div class="line-decoration"></div>
+        
+        <h1 class="headline">Break the Ordinary</h1>
+        
+        <p class="subheading">
+            Step into a world where bold ideas meet fearless action. 
+            Your journey to extraordinary begins here.
+        </p>
+        
+        <a href="https://forms.gle/zivcYJbRyQqU3p9Q6" class="cta-button" target="_blank" rel="noopener noreferrer">
+            <span>Join Now</span>
+        </a>
+    </div>
+    
+    <!-- ===== MINIMAL JAVASCRIPT ===== -->
+    <script>
+        // Add subtle parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const container = document.querySelector('.container');
+            const background = document.querySelector('.background-layer');
+            
+            // Calculate mouse position as percentage
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            // Apply subtle transform to create depth
+            container.style.transform = `translateY(0) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            background.style.transform = `translate(${-xAxis * 2}px, ${-yAxis * 2}px)`;
+        });
+        
+        // Reset transform when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const container = document.querySelector('.container');
+            const background = document.querySelector('.background-layer');
+            
+            container.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
+            background.style.transform = 'translate(0, 0)';
+        });
+        
+        // Add ripple effect on button click
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
