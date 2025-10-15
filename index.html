@@ -1,339 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Join the Movement</title>
-    
-    <style>
-        /* ===== GLOBAL RESET & BASE STYLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        /* ===== ANIMATED BACKGROUND PATTERN ===== */
-        /* Creates a subtle parallax effect with moving gradient circles */
-        .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .background-layer::before,
-        .background-layer::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 174, 239, 0.12) 0%, transparent 70%);
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .background-layer::before {
-            width: 600px;
-            height: 600px;
-            top: -200px;
-            left: -200px;
-            animation-delay: 0s;
-        }
-        
-        .background-layer::after {
-            width: 800px;
-            height: 800px;
-            bottom: -300px;
-            right: -300px;
-            animation-delay: -10s;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(50px, -50px) scale(1.1);
-            }
-            66% {
-                transform: translate(-30px, 30px) scale(0.9);
-            }
-        }
-        
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 900px;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.2s ease-out forwards;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* ===== TYPOGRAPHY ===== */
-        .headline {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #00aeef 0%, #00aeef 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1.2s ease-out 0.3s backwards;
-        }
-        
-        .subheading {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            line-height: 1.6;
-            margin-bottom: 50px;
-            color: #cccccc;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1.2s ease-out 0.6s backwards;
-        }
-        
-        /* ===== CALL-TO-ACTION BUTTON ===== */
-        .cta-button {
-            display: inline-block;
-            padding: 20px 60px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #ffffff;
-            background-color: #00aeef;
-            border: 3px solid #00aeef;
-            border-radius: 50px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 1.2s ease-out 0.9s backwards;
-            box-shadow: 0 10px 40px rgba(0, 174, 239, 0.2);
+    <style type="text/css">
+        /* CLIENT-SPECIFIC RESET */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* RESET */
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+        /* iOS BLUE LINKS */
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
         }
 
-        /* Glow effect on hover */
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .cta-button:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 174, 239, 0.35);
-            background-color: #00aeef;
-        }
-        
-        .cta-button:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-        
-        .cta-button span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* ===== DECORATIVE ELEMENTS ===== */
-        /* Thin lines that frame the content */
-        .line-decoration {
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00aeef, transparent);
-            margin: 0 auto 40px;
-            animation: fadeInUp 1.2s ease-out 0.4s backwards;
-        }
+        /* ANDROID CENTER FIX */
+        div[style*="margin: 16px 0"] { margin: 0 !important; }
 
-        .hero-image {
-            width: min(260px, 60vw);
-            height: auto;
-            margin: 0 auto 30px;
-            display: block;
-            border-radius: 12px;
-            border: 4px solid #00aeef;
-            box-shadow: 0 12px 45px rgba(0, 174, 239, 0.25);
-            animation: fadeInUp 1.2s ease-out 0.2s backwards;
-        }
-        
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 15px;
+        @media screen and (max-width: 600px) {
+            .wrapper { width: 100% !important; }
+            .mobile-padding { padding-left: 24px !important; padding-right: 24px !important; }
+            .stack-column, .stack-column-cell {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
-            
-            .headline {
-                margin-bottom: 20px;
-            }
-            
-            .subheading {
-                margin-bottom: 40px;
-                font-size: 1rem;
-            }
-            
-            .cta-button {
-                padding: 18px 50px;
-                font-size: 1rem;
-            }
-            
-            .line-decoration {
-                width: 60px;
-                margin-bottom: 30px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .cta-button {
-                padding: 16px 40px;
-                font-size: 0.9rem;
-            }
-        }
-        
-        /* ===== ACCESSIBILITY ===== */
-        /* Respect user's motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            
-            html {
-                scroll-behavior: auto;
-            }
+            .headline { font-size: 36px !important; line-height: 44px !important; }
+            .copy { font-size: 16px !important; }
+            .btn { padding: 18px 32px !important; }
         }
     </style>
 </head>
-<body>
-    <!-- ===== ANIMATED BACKGROUND ===== -->
-    <div class="background-layer"></div>
-    
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="container">
-        <img src="https://res.cloudinary.com/dewklkyzj/image/upload/v1759899013/2024-05-15_22-57-49_1715839094_n6oxg7.webp" alt="Icebreakers Water product display" class="hero-image">
-
-        <div class="line-decoration"></div>
-
-        <h1 class="headline">Welcome to Icebreakers Water</h1>
-
-        <p class="subheading">
-            This is the Retailer Distribution Order Form.
-        </p>
-
-        <a href="https://forms.gle/zivcYJbRyQqU3p9Q6" class="cta-button" target="_blank" rel="noopener noreferrer">
-            <span>Order Request Form</span>
-        </a>
+<body style="background-color:#000000;">
+    <div style="display:none; font-size:1px; color:#000000; line-height:1px; max-height:0px; max-width:0px; opacity:0; overflow:hidden;">
+        Be among the first retailers to join the movement.
     </div>
-    
-    <!-- ===== MINIMAL JAVASCRIPT ===== -->
-    <script>
-        // Add subtle parallax effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const container = document.querySelector('.container');
-            const background = document.querySelector('.background-layer');
-            
-            // Calculate mouse position as percentage
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
-            
-            // Apply subtle transform to create depth
-            container.style.transform = `translateY(0) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            background.style.transform = `translate(${-xAxis * 2}px, ${-yAxis * 2}px)`;
-        });
-        
-        // Reset transform when mouse leaves
-        document.addEventListener('mouseleave', () => {
-            const container = document.querySelector('.container');
-            const background = document.querySelector('.background-layer');
-            
-            container.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
-            background.style.transform = 'translate(0, 0)';
-        });
-        
-        // Add ripple effect on button click
-        document.querySelector('.cta-button').addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                top: ${y}px;
-                left: ${x}px;
-                background: rgba(0, 0, 0, 0.1);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 0.6s ease-out;
-                pointer-events: none;
-            `;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
-        });
-        
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#000000;">
+        <tr>
+            <td align="center" style="padding: 32px 16px;">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper" style="max-width:600px; border-radius:20px; overflow:hidden; background-color:#101010;">
+                    <tr>
+                        <td align="center" style="padding: 48px 48px 32px 48px;" class="mobile-padding">
+                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:48px; line-height:56px; font-weight:800; letter-spacing:-0.02em;" class="headline">
+                                        Join the Movement
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="24" style="line-height:24px; font-size:24px;">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#cccccc; font-size:18px; line-height:28px; font-weight:300;" class="copy">
+                                        Become part of the next wave of retail innovation. Connect with customers in new ways, unlock curated experiences, and stay ahead with insights tailored for your brand.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="32" style="line-height:32px; font-size:32px;">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center" bgcolor="#00aeef" style="border-radius:999px;">
+                                                    <a href="https://example.com" target="_blank" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#ffffff; text-decoration:none; display:inline-block; padding:20px 48px; border:1px solid #00aeef;" class="btn">
+                                                        Get Started
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40" style="line-height:40px; font-size:40px;">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 0 48px 48px 48px;" class="mobile-padding">
+                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#7a7a7a; font-size:14px; line-height:22px;">
+                                        You're receiving this message because you opted in to hear more about our retail solutions.<br />
+                                        <a href="https://example.com/preferences" style="color:#00aeef; text-decoration:none;">Update preferences</a> &nbsp;|&nbsp;
+                                        <a href="https://example.com/unsubscribe" style="color:#00aeef; text-decoration:none;">Unsubscribe</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
