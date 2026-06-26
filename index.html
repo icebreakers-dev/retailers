@@ -1,261 +1,414 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Join the Movement</title>
-    <style type="text/css">
-        /* CLIENT-SPECIFIC RESET */
-        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-        img { -ms-interpolation-mode: bicubic; }
+    <style>
+        /* ── RESET ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { width: 100%; }
+        img { border: 0; display: block; max-width: 100%; height: auto; }
+        a { color: inherit; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
 
-        /* RESET */
-        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-        table { border-collapse: collapse !important; }
-        body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
-
-        /* iOS BLUE LINKS */
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
+        /* ── GLOBAL ── */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://res.cloudinary.com/dewklkyzj/image/upload/v1782515282/Icey_Background_dxybik.png');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #b8dcf0;
+            min-height: 100vh;
         }
 
-        /* ANDROID CENTER FIX */
-        div[style*="margin: 16px 0"] { margin: 0 !important; }
-
-        /* ICY HEADLINE EFFECT */
-        .ice-headline {
-            color: #0d2240;
+        /* ── PAGE WRAP — mobile: no padding, full bleed ── */
+        .page-wrap {
+            width: 100%;
+            padding: 0;
         }
 
-        /* FROST SHIMMER ON CARD */
-        .frost-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.92) 0%, rgba(220,242,255,0.88) 50%, rgba(255,255,255,0.95) 100%);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(0,174,239,0.18);
-            box-shadow:
-                0 8px 32px rgba(0, 90, 160, 0.12),
-                0 2px 8px rgba(0, 174, 239, 0.08),
-                inset 0 1px 0 rgba(255,255,255,0.9);
+        /* ── CARD ── */
+        .card {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 0;
+            overflow: hidden;
+            background: linear-gradient(145deg,
+                rgba(255,255,255,0.93) 0%,
+                rgba(220,242,255,0.89) 50%,
+                rgba(255,255,255,0.95) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        /* BENEFIT CARDS */
-        .benefit-card {
-            background: linear-gradient(160deg, #0d2240 0%, #0a1a30 60%, #0d2a45 100%);
-            border: 1px solid rgba(0,174,239,0.35);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(0,174,239,0.15);
+        /* ── CARD INNER — tight on mobile ── */
+        .card-inner {
+            padding: 28px 20px 32px;
         }
 
-        /* ICY DIVIDER */
+        /* ── LOGO ── */
+        .logo {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+            margin: 0 auto 20px;
+        }
+
+        /* ── ICY DIVIDER ── */
         .ice-divider {
             height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #00aeef 30%, #7fd8f8 50%, #00aeef 70%, transparent 100%);
+            background: linear-gradient(90deg,
+                transparent 0%,
+                #00aeef 30%,
+                #7fd8f8 50%,
+                #00aeef 70%,
+                transparent 100%);
             border: none;
-            margin: 0;
         }
 
-        @media screen and (max-width: 600px) {
-            .wrapper { width: 100% !important; }
-            .mobile-padding { padding-left: 24px !important; padding-right: 24px !important; }
-            .stack-column, .stack-column-cell {
-                display: block !important;
-                width: 100% !important;
-                max-width: 100% !important;
+        /* ── HEADLINE ── */
+        .headline {
+            color: #0d2240;
+            font-size: 26px;
+            line-height: 34px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-align: center;
+            padding: 18px 0;
+        }
+
+        /* ── IMAGES ── */
+        .images-row {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .images-row img {
+            flex: 1;
+            width: 50%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 90, 160, 0.2);
+        }
+
+        /* ── BODY COPY ── */
+        .copy {
+            color: #0d2240;
+            font-size: 15px;
+            line-height: 24px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        /* ── BENEFIT CARDS — stack on mobile ── */
+        .benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .benefit-card {
+            background: linear-gradient(160deg, #0d2240 0%, #0a1a30 60%, #0d2a45 100%);
+            border: 1px solid rgba(0, 174, 239, 0.35);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(0,174,239,0.15);
+            padding: 20px 16px;
+            text-align: center;
+        }
+        .benefit-icon {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 10px;
+            background: linear-gradient(135deg, #00aeef, #0077c2);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            font-size: 20px;
+            line-height: 44px;
+        }
+        .benefit-title {
+            color: #00aeef;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .benefit-desc {
+            color: #8ab8d4;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        /* ── PULL QUOTE ── */
+        .pull-quote {
+            border-left: 3px solid #00aeef;
+            padding: 12px 16px;
+            background: linear-gradient(90deg, rgba(0,174,239,0.07) 0%, transparent 100%);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 24px;
+        }
+        .pull-quote-text {
+            color: #0d2240;
+            font-size: 15px;
+            line-height: 26px;
+            font-style: italic;
+        }
+        .pull-quote-attr {
+            color: #00aeef;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        /* ── URGENCY HOOK ── */
+        .urgency {
+            background: linear-gradient(135deg, #0a1628 0%, #0d2240 50%, #0a1628 100%);
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid rgba(0, 174, 239, 0.3);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(0,174,239,0.15);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .urgency-label {
+            color: #00aeef;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .urgency-text {
+            color: #a0c8e0;
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        /* ── CTA — full width on mobile ── */
+        .cta-wrap { text-align: center; }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #0099d6 0%, #00aeef 40%, #33c3f5 100%);
+            box-shadow: 0 4px 20px rgba(0, 174, 239, 0.45), 0 0 0 1px rgba(0,174,239,0.3);
+            border-radius: 999px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 24px;
+            text-shadow: 0 1px 3px rgba(0, 60, 120, 0.3);
+        }
+        .cta-sub {
+            color: #5a90b0;
+            font-size: 11px;
+            line-height: 18px;
+            margin-top: 10px;
+        }
+
+        /* ── FOOTER — stacked on mobile ── */
+        .footer {
+            background: linear-gradient(90deg, #0a1628 0%, #0d2240 50%, #0a1628 100%);
+            padding: 20px;
+            border-top: 2px solid rgba(0, 174, 239, 0.4);
+        }
+        .footer-contact {
+            color: #7ab8d4;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            line-height: 20px;
+            margin-bottom: 12px;
+        }
+        .footer-tagline {
+            color: #a0c8e0;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* ════════════════════════════════
+           DESKTOP  ≥ 600px
+        ════════════════════════════════ */
+        @media screen and (min-width: 600px) {
+
+            .page-wrap {
+                padding: 40px 16px;
             }
-            .headline { font-size: 36px !important; line-height: 44px !important; }
-            .copy { font-size: 16px !important; }
-            .btn { padding: 18px 32px !important; }
+
+            .card {
+                border-radius: 20px;
+                border: 1px solid rgba(0, 174, 239, 0.18);
+                box-shadow:
+                    0 8px 32px rgba(0, 90, 160, 0.14),
+                    0 2px 8px rgba(0, 174, 239, 0.08),
+                    inset 0 1px 0 rgba(255,255,255,0.9);
+            }
+
+            .card-inner {
+                padding: 48px 48px 40px;
+            }
+
+            .logo {
+                max-width: 220px;
+                margin-bottom: 24px;
+            }
+
+            .headline {
+                font-size: 44px;
+                line-height: 52px;
+                padding: 22px 0;
+            }
+
+            .images-row img {
+                height: 200px;
+                border-radius: 12px;
+            }
+
+            .copy {
+                font-size: 18px;
+                line-height: 28px;
+            }
+
+            /* Benefit cards side by side on desktop */
+            .benefits {
+                flex-direction: row;
+            }
+            .benefit-card {
+                flex: 1;
+            }
+
+            .pull-quote-text {
+                font-size: 17px;
+                line-height: 28px;
+            }
+
+            /* CTA auto-width on desktop */
+            .cta-btn {
+                display: inline-block;
+                width: auto;
+                padding: 20px 48px;
+                font-size: 16px;
+            }
+
+            /* Footer side by side on desktop */
+            .footer {
+                padding: 18px 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .footer-contact { margin-bottom: 0; }
+            .footer-tagline { text-align: right; }
         }
     </style>
 </head>
-<body style="background-image: url('https://res.cloudinary.com/dewklkyzj/image/upload/v1782515282/Icey_Background_dxybik.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-color: #b8dcf0;">
+<body>
+    <div class="page-wrap">
+        <div class="card">
+            <div class="card-inner">
 
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: transparent;">
-        <tr>
-            <td align="center" style="padding: 32px 16px;">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper frost-card" style="max-width:600px; border-radius:20px; overflow:hidden;">
-                    <tr>
-                        <td align="center" style="padding: 48px 48px 32px 48px;" class="mobile-padding">
-                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td align="center" style="padding-bottom:24px;">
-                                        <img src="https://res.cloudinary.com/dewklkyzj/image/upload/v1780383105/icebreakerslogo_xfo5qr.png" width="220" alt="Icebreakers Water logo" style="display:block; width:100%; max-width:220px; height:auto;" />
-                                    </td>
-                                </tr>
+                <!-- LOGO -->
+                <img
+                    src="https://res.cloudinary.com/dewklkyzj/image/upload/v1780383105/icebreakerslogo_xfo5qr.png"
+                    class="logo"
+                    alt="Icebreakers Water logo"
+                />
 
-                                <!-- ICY DIVIDER -->
-                                <tr>
-                                    <td style="padding-bottom: 20px;">
-                                        <div class="ice-divider"></div>
-                                    </td>
-                                </tr>
+                <!-- DIVIDER -->
+                <div class="ice-divider"></div>
 
-                                <tr>
-                                    <td align="center" class="headline ice-headline" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:48px; line-height:56px; font-weight:800; letter-spacing:-0.02em;">
-                                        Partner With Icebreakers Water
-                                    </td>
-                                </tr>
+                <!-- HEADLINE -->
+                <h1 class="headline">Partner With Icebreakers Water</h1>
 
-                                <!-- ICY DIVIDER -->
-                                <tr>
-                                    <td style="padding-top: 20px; padding-bottom: 4px;">
-                                        <div class="ice-divider"></div>
-                                    </td>
-                                </tr>
+                <!-- DIVIDER -->
+                <div class="ice-divider" style="margin-bottom:20px;"></div>
 
-                                <tr>
-                                    <td height="24" style="line-height:24px; font-size:24px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table role="presentation" width="100%" border="0" cellspacing="8" cellpadding="0">
-                                            <tr>
-                                                <td width="50%" align="center" valign="top">
-                                                    <img src="https://res.cloudinary.com/dewklkyzj/image/upload/v1766273453/WarmGoldern_qpfeos.png" width="240" alt="Warm golden retail showcase" style="display:block; width:100%; max-width:240px; height:200px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 24px rgba(0,90,160,0.18);" />
-                                                </td>
-                                                <td width="50%" align="center" valign="top">
-                                                    <img src="https://res.cloudinary.com/dewklkyzj/image/upload/v1766273448/download2_bbkhqk.png" width="240" alt="Icebreakers product showcase" style="display:block; width:100%; max-width:240px; height:200px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 24px rgba(0,90,160,0.18);" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="24" style="line-height:24px; font-size:24px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#0d2240; font-size:18px; line-height:28px; font-weight:300;" class="copy">
-                                        Icebreakers Water partners with retailers, hospitality groups, and businesses seeking a premium bottled water solution. Our wholesale program offers dependable supply, modern branding, and flexible ordering to support your operation as it grows.
-                                    </td>
-                                </tr>
+                <!-- IMAGES -->
+                <div class="images-row">
+                    <img
+                        src="https://res.cloudinary.com/dewklkyzj/image/upload/v1766273453/WarmGoldern_qpfeos.png"
+                        alt="Warm golden retail showcase"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dewklkyzj/image/upload/v1766273448/download2_bbkhqk.png"
+                        alt="Icebreakers product showcase"
+                    />
+                </div>
 
-                                <!-- BENEFIT CARDS -->
-                                <tr>
-                                    <td height="32" style="line-height:32px; font-size:32px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td width="33%" align="center" valign="top" class="stack-column-cell" style="padding: 0 6px 12px 0;">
-                                                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="benefit-card">
-                                                        <tr>
-                                                            <td align="center" style="padding: 24px 16px;">
-                                                                <!-- Hexagon-style icon area -->
-                                                                <div style="width:44px; height:44px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #00aeef, #0077c2); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display:flex; align-items:center; justify-content:center; font-size:20px; line-height:44px; text-align:center;">&#128167;</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">Wholesale Pricing</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#8ab8d4; font-size:13px; line-height:20px;">Competitive per-case rates that protect your margins, with better pricing as your volume grows.</div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td width="33%" align="center" valign="top" class="stack-column-cell" style="padding: 0 6px 12px 6px;">
-                                                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="benefit-card">
-                                                        <tr>
-                                                            <td align="center" style="padding: 24px 16px;">
-                                                                <div style="width:44px; height:44px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #00aeef, #0077c2); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display:flex; align-items:center; justify-content:center; font-size:20px; line-height:44px; text-align:center;">&#127754;</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">Flexible Ordering</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#8ab8d4; font-size:13px; line-height:20px;">Low minimums to get started, with easy reorder options built around your business cycle.</div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td width="33%" align="center" valign="top" class="stack-column-cell" style="padding: 0 0 12px 6px;">
-                                                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="benefit-card">
-                                                        <tr>
-                                                            <td align="center" style="padding: 24px 16px;">
-                                                                <div style="width:44px; height:44px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #00aeef, #0077c2); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display:flex; align-items:center; justify-content:center; font-size:20px; line-height:44px; text-align:center;">&#128166;</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">Dedicated Support</div>
-                                                                <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#8ab8d4; font-size:13px; line-height:20px;">A direct line to our team — not a call center. Real people who know your account.</div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+                <!-- BODY COPY -->
+                <p class="copy">
+                    Icebreakers Water partners with retailers, hospitality groups, and businesses seeking a premium bottled water solution. Our wholesale program offers dependable supply, modern branding, and flexible ordering to support your operation as it grows.
+                </p>
 
-                                <!-- PULL QUOTE -->
-                                <tr>
-                                    <td height="32" style="line-height:32px; font-size:32px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td style="border-left:3px solid #00aeef; padding-left:20px; background: linear-gradient(90deg, rgba(0,174,239,0.06) 0%, transparent 100%); border-radius: 0 8px 8px 0;">
-                                        <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#0d2240; font-size:17px; line-height:28px; font-style:italic;">"Icebreakers moved fast, kept us stocked, and our customers keep asking for it by name. Best wholesale add we've made this year."</div>
-                                        <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding-top:10px;">— Wholesale Buyer, Phoenix Area</div>
-                                    </td>
-                                </tr>
+                <!-- BENEFIT CARDS -->
+                <div class="benefits">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">&#128167;</div>
+                        <div class="benefit-title">Wholesale Pricing</div>
+                        <div class="benefit-desc">Competitive per-case rates that protect your margins, with better pricing as your volume grows.</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">&#127754;</div>
+                        <div class="benefit-title">Flexible Ordering</div>
+                        <div class="benefit-desc">Low minimums to get started, with easy reorder options built around your business cycle.</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">&#128166;</div>
+                        <div class="benefit-title">Dedicated Support</div>
+                        <div class="benefit-desc">A direct line to our team — not a call center. Real people who know your account.</div>
+                    </div>
+                </div>
 
-                                <!-- URGENCY HOOK -->
-                                <tr>
-                                    <td height="28" style="line-height:28px; font-size:28px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" style="background: linear-gradient(135deg, #0a1628 0%, #0d2240 50%, #0a1628 100%); border-radius:12px; padding:20px 24px; border: 1px solid rgba(0,174,239,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(0,174,239,0.15);">
-                                        <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#00aeef; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding-bottom:6px;">Now Accepting New Partners</div>
-                                        <div style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#a0c8e0; font-size:14px; line-height:22px;">We're onboarding a limited number of wholesale partners this quarter. Submit your inquiry now to lock in early partner pricing.</div>
-                                    </td>
-                                </tr>
+                <!-- PULL QUOTE -->
+                <div class="pull-quote">
+                    <div class="pull-quote-text">"Icebreakers moved fast, kept us stocked, and our customers keep asking for it by name. Best wholesale add we've made this year."</div>
+                    <div class="pull-quote-attr">— Wholesale Buyer, Phoenix Area</div>
+                </div>
 
-                                <!-- CTA -->
-                                <tr>
-                                    <td height="32" style="line-height:32px; font-size:32px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td align="center" style="border-radius:999px; background: linear-gradient(135deg, #0099d6 0%, #00aeef 40%, #33c3f5 100%); box-shadow: 0 4px 20px rgba(0,174,239,0.45), 0 0 0 1px rgba(0,174,239,0.3);">
-                                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9-fIwmoMS_1OtySj0LQdZoa31pEf_3A4I-KM5SidBf8YjoA/viewform" target="_blank" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#ffffff; text-decoration:none; display:inline-block; padding:20px 48px; text-shadow: 0 1px 3px rgba(0,60,120,0.3);" class="btn">
-                                                        Request Wholesale Information
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#5a90b0; font-size:12px; line-height:18px; font-weight:400; padding-top:12px;">
-                                                    Wholesale pricing • Bulk ordering • Business support
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="40" style="line-height:40px; font-size:40px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <!-- URGENCY HOOK -->
+                <div class="urgency">
+                    <div class="urgency-label">Now Accepting New Partners</div>
+                    <div class="urgency-text">We're onboarding a limited number of wholesale partners this quarter. Submit your inquiry now to lock in early partner pricing.</div>
+                </div>
 
-                    <!-- FOOTER BAR — matches ad's dark navy bottom strip -->
-                    <tr>
-                        <td style="background: linear-gradient(90deg, #0a1628 0%, #0d2240 50%, #0a1628 100%); padding: 18px 32px; border-top: 2px solid rgba(0,174,239,0.4);">
-                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#7ab8d4; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; line-height:20px;">
-                                        REFRESH@ICEBREAKERSWATER.COM<br/>
-                                        623.336.5355<br/>
-                                        WWW.ICEBREAKERSWATER.COM
-                                    </td>
-                                    <td align="right" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#a0c8e0; white-space:nowrap;">
-                                        HYDRATE. ELEVATE. ICEBREAKERS.
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                <!-- CTA -->
+                <div class="cta-wrap">
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSc9-fIwmoMS_1OtySj0LQdZoa31pEf_3A4I-KM5SidBf8YjoA/viewform"
+                        target="_blank"
+                        class="cta-btn"
+                    >
+                        Request Wholesale Information
+                    </a>
+                    <p class="cta-sub">Wholesale pricing &bull; Bulk ordering &bull; Business support</p>
+                </div>
 
-                </table>
-            </td>
-        </tr>
-    </table>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <div class="footer-contact">
+                    REFRESH@ICEBREAKERSWATER.COM<br>
+                    623.336.5355<br>
+                    WWW.ICEBREAKERSWATER.COM
+                </div>
+                <div class="footer-tagline">HYDRATE. ELEVATE. ICEBREAKERS.</div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
